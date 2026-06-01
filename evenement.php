@@ -16,6 +16,7 @@ $resultat=$connexion->query($sql);
             background: #f4f4f4;
             margin: 20px;
         }
+        
         h1{
             text-align: center;
         }
@@ -53,7 +54,7 @@ $resultat=$connexion->query($sql);
 </head>
 <body>
     <h1>Catalogue des evenements</h1>
-   <div class="container">
+    <div class="container">
 
        <?php
             if ($resultat && $resultat->num_rows > 0){
@@ -79,4 +80,4 @@ $resultat=$connexion->query($sql);
 </html>
 <?php
 $connexion->close();
-?>
+?>  
