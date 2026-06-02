@@ -2,7 +2,7 @@
 $serveur="localhost";
 $utlisateur="root";
 $motdepasse="";
-$basededonne="campus_events";
+$basededonne="activite";
 
 $connexion=new mysqli($serveur,$utlisateur,$motdepasse,$basededonne);
 

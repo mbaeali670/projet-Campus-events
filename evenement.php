@@ -1,6 +1,6 @@
 <?php
 require_once"connexion.php";
-$sql= "SELECT*FROM evenements";
+$sql= "SELECT*FROM rencontres";
 $resultat=$connexion->query($sql);
 ?>
 <!DOCTYPE html>
@@ -64,7 +64,7 @@ $resultat=$connexion->query($sql);
                    <div class='card'>
                    <h2>".$row['titre']."</h2>
                    <p><strong>Description :</strong>".$row['description']."</p>
-                   <p><strong>Date :</strong>".$row['date_event']."</p>
+                   <p><strong>Date :</strong>".$row['date']."</p>
                    <p><strong>Lieu:</strong>".$row['lieu']."</p>
                    <p><strong>Organisateur:</strong>".$row['organisateur']."</p>
 

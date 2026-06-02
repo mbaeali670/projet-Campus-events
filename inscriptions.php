@@ -1,7 +1,6 @@
 <?php
 require_once"connexion.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +46,7 @@ require_once"connexion.php";
 </head>
 <body>
     <?php
-    $sql= "SELECT * FROM inscriptions";
+    $sql= "SELECT * FROM participation";
     $resultat= $connexion->query($sql);
     echo"<h1>Liste des étudiants inscrits</h1>";
     if($resultat && $resultat->num_rows > 0){

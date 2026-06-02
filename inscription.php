@@ -7,7 +7,7 @@ if(!isset($_GET['id']) || empty($_GET['id'])){
 
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM evenements WHERE id = $id";
+$sql = "SELECT * FROM rencontres WHERE id = $id";
 $resultat = $connexion->query($sql);
 
 if($resultat && $resultat->num_rows > 0){
@@ -20,7 +20,7 @@ if(isset($_POST['submit'])){
     $prenom=$_POST['prenom'];
     $email=$_POST['email'];
     $filiere=$_POST['filiere'];
-    $sql_inscription="INSERT INTO inscriptions(nom,prenom,email,filiere,evenement_id)
+    $sql_inscription="INSERT INTO participation(nom,prenom,email,filiere,evenement_id)
     VALUES ('$nom','$prenom','$email','$filiere','$id')";
     if($connexion->query($sql_inscription)=== TRUE){
         $message="Inscription réussie avec succés  🎉";
