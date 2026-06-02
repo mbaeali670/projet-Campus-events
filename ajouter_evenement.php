@@ -13,7 +13,7 @@
         <label>Description:</label><br>
         <textarea name="description" required></textarea><br><br>
         <label>Date:</label><br><br>
-        <input type="date" name="date" required><br><br>
+        <input type="date" name="date_event" required><br><br>
         <label>Lieu:</label>
         <input type="text" name="lieu" required><br><br>
         <label>Organisateur:</label><br>
@@ -30,12 +30,12 @@ require_once"connexion.php";
 if(isset($_POST['submit'])){
     $titre=$_POST['titre'];
     $description=$_POST['description'];
-    $date=$_POST['date'];
+    $date_event=$_POST['date_event'];
     $lieu=$_POST['lieu'];
     $organisateur=$_POST['organisateur'];
 
-    $sql= "INSERT INTO rencontres(titre,description,date,lieu,organisateur)
-    VALUES('$titre','$description','$date','$lieu','$organisateur')";
+    $sql= "INSERT INTO rencontres(titre,description,date_event,lieu,organisateur)
+    VALUES('$titre','$description','$date_event','$lieu','$organisateur')";
 
     if($connexion->query($sql)===TRUE){
         echo"Evenement ajouté avec succes !";
