@@ -27,21 +27,20 @@ require_once "connexion.php";
 }
 
 body{
-    background: var(--light);
-    color: var(--dark);
+    background: linear-gradient(135deg, #d7e1ec, #f5f7fa);
+    min-height: 100vh;
 }
 
 header{
-    background: var(--primary);
-    color: var(--white);
+    background: #030381;
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
+    padding: 18px 50px;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .logo{
@@ -138,7 +137,7 @@ tr:hover{
 <body>
 
 <header>
-    <div class="logo">Admin Campus</div>
+    <div class="logo">Campus Events</div>
 
     <nav>
         <ul>

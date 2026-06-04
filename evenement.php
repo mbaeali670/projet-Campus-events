@@ -13,7 +13,7 @@ $resultat = $connexion->query($sql);
 <title>Catalogue des événements</title>
 
 <style>
-:root{
+    :root{
     --primary: #0b2a4a;
     --secondary: #1e88e5;
     --accent: #ffb300;
@@ -30,22 +30,22 @@ $resultat = $connexion->query($sql);
 }
 
 body{
-    background: var(--light);
-    color: var(--dark);
+    background: linear-gradient(135deg, #d7e1ec, #f5f7fa);
+    min-height: 100vh;
 }
 
 header{
-    background: var(--primary);
-    color: var(--white);
+    background: #030381;
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
+    padding: 18px 50px;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
 
 .logo{
     font-size: 22px;
@@ -97,7 +97,6 @@ h1{
     color:var(--primary);
 }
 
-/* CONTAINER */
 .container{
     display:flex;
     flex-wrap:wrap;
@@ -106,7 +105,6 @@ h1{
     padding:20px;
 }
 
-/* CARD */
 .card{
     width:300px;
     background:white;
@@ -131,7 +129,6 @@ h1{
     margin-bottom:8px;
 }
 
-/* BUTTON */
 .btn{
     display:inline-block;
     margin-top:10px;
