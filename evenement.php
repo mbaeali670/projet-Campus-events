@@ -14,56 +14,83 @@ $resultat = $connexion->query($sql);
 
 <style>
 :root{
-    --primary:#0b2a4a;
-    --secondary:#1e88e5;
-    --accent:#ffb300;
-    --bg:#f4f6fb;
+    --primary: #0b2a4a;
+    --secondary: #1e88e5;
+    --accent: #ffb300;
+    --light: #f5f7fb;
+    --dark: #1c1c1c;
+    --white: #ffffff;
 }
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
 }
 
 body{
-    background:var(--bg);
+    background: var(--light);
+    color: var(--dark);
 }
 
-/* HEADER */
 header{
-    background:var(--primary);
-    color:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 40px;
-    position:sticky;
-    top:0;
+    background: var(--primary);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .logo{
-    font-size:20px;
-    font-weight:bold;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 nav ul{
-    display:flex;
-    list-style:none;
-    gap:20px;
+    display: flex;
+    list-style: none;
+    gap: 25px;
 }
 
 nav ul li a{
-    color:white;
-    text-decoration:none;
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 500;
+    position: relative;
+    transition: 0.3s;
+}
+
+nav ul li a::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
+    transition: 0.3s;
 }
 
 nav ul li a:hover{
-    color:var(--accent);
+    color: var(--accent);
 }
 
-/* TITLE */
+nav ul li a:hover::after{
+    width: 100%;
+}
+
+.menu-toggle{
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
 h1{
     text-align:center;
     margin:30px 0;
