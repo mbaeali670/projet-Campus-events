@@ -25,7 +25,7 @@
 </body>
 </html>
 <?php
-require_once"connexion.php";
+require_once"connexion.php"; 
 
 if(isset($_POST['submit'])){
     $titre=$_POST['titre'];
