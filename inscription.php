@@ -32,7 +32,6 @@ if(isset($_POST['submit'])){
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -54,7 +53,6 @@ body{
     min-height:100vh;
 }
 
-/* MENU */
 
 header{
     background:#0b2a4a;
@@ -90,13 +88,82 @@ nav ul li a:hover{
     color:#ffb300;
 }
 
+
 .menu-toggle{
     display:none;
-    font-size:28px;
+    flex-direction:column;
+    gap:5px;
     cursor:pointer;
 }
 
-/* FORMULAIRE */
+.menu-toggle span{
+    width:30px;
+    height:3px;
+    background:white;
+    border-radius:5px;
+    transition:0.3s;
+}
+
+
+.menu-toggle.active span:nth-child(1){
+    transform:rotate(45deg) translate(6px,6px);
+}
+
+.menu-toggle.active span:nth-child(2){
+    opacity:0;
+}
+
+.menu-toggle.active span:nth-child(3){
+    transform:rotate(-45deg) translate(5px,-5px);
+}
+
+
+@media(max-width:768px){
+
+    header{
+        padding:15px 20px;
+    }
+
+    .menu-toggle{
+        display:flex;
+    }
+
+    nav{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#0b2a4a;
+        box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    nav.active{
+        display:block;
+    }
+
+    nav ul{
+        flex-direction:column;
+        gap:0;
+    }
+
+    nav ul li{
+        border-top:1px solid rgba(255,255,255,0.1);
+    }
+
+    nav ul li a{
+        display:block;
+        padding:15px;
+        text-align:center;
+    }
+
+    nav ul li a:hover{
+        background:#2563eb;
+        color:white;
+    }
+}
+
+/* ================= FORMULAIRE ================= */
 
 .container{
     display:flex;
@@ -171,50 +238,16 @@ button:hover{
     margin-bottom:15px;
 }
 
-/* MOBILE */
-
-@media(max-width:768px){
-
-    .menu-toggle{
-        display:block;
-    }
-
-    nav{
-        display:none;
-        position:absolute;
-        top:65px;
-        left:0;
-        width:100%;
-        background:#0b2a4a;
-    }
-
-    nav.active{
-        display:block;
-    }
-
-    nav ul{
-        flex-direction:column;
-        text-align:center;
-        padding:15px 0;
-    }
-
-    nav ul li{
-        margin:10px 0;
-    }
-
-    header{
-        padding:15px 20px;
-    }
-}
-
 </style>
 </head>
+
 <body>
 
 <header>
-    <div class="logo">Campus Events</div>
 
+    <div class="logo">Campus Events</div>
     <div class="menu-toggle">☰</div>
+
 
     <nav>
         <ul>
@@ -224,6 +257,7 @@ button:hover{
             <li><a href="inscriptions.php">Administration</a></li>
         </ul>
     </nav>
+
 </header>
 
 <div class="container">
@@ -267,12 +301,15 @@ button:hover{
 </div>
 
 <script>
+
 const toggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector("nav");
 
 toggle.addEventListener("click", () => {
     nav.classList.toggle("active");
+    toggle.classList.toggle("active");
 });
+
 </script>
 
 </body>

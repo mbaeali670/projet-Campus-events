@@ -4,7 +4,6 @@ require_once "connexion.php";
 $sql = "SELECT * FROM rencontres";
 $resultat = $connexion->query($sql);
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +12,7 @@ $resultat = $connexion->query($sql);
 <title>Catalogue des événements</title>
 
 <style>
-    :root{
+:root{
     --primary: #0b2a4a;
     --secondary: #1e88e5;
     --accent: #ffb300;
@@ -45,7 +44,6 @@ header{
     top: 0;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-
 
 .logo{
     font-size: 22px;
@@ -87,26 +85,91 @@ nav ul li a:hover::after{
 }
 
 .menu-toggle{
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
 }
+
+.menu-toggle span{
+    width:30px;
+    height:3px;
+    background:white;
+    border-radius:5px;
+    transition:0.3s;
+}
+
+.menu-toggle.active span:nth-child(1){
+    transform:rotate(45deg) translate(6px,6px);
+}
+
+.menu-toggle.active span:nth-child(2){
+    opacity:0;
+}
+
+.menu-toggle.active span:nth-child(3){
+    transform:rotate(-45deg) translate(5px,-5px);
+}
+
+
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:flex;
+    }
+
+    nav{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#030381;
+    }
+
+    nav.active{
+        display:block;
+    }
+
+    nav ul{
+        flex-direction:column;
+    }
+
+    nav ul li a{
+        display:block;
+        padding:15px;
+        text-align:center;
+    }
+
+    nav ul li a:hover{
+        background:var(--accent);
+        color:#030381;
+    }
+}
+
+@keyframes slideDown{
+    from{opacity:0; transform:translateY(-10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+
 h1{
     text-align:center;
     margin:30px 0;
     color:var(--primary);
 }
 
+
 .container{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
     gap:20px;
     padding:20px;
+    max-width:1100px;
+    margin:auto;
 }
 
 .card{
-    width:300px;
     background:white;
     padding:20px;
     border-radius:15px;
@@ -137,11 +200,22 @@ h1{
     color:white;
     text-decoration:none;
     border-radius:8px;
-    margin-right:5px;
 }
 
 .btn:hover{
     background:var(--primary);
+}
+
+@media(max-width:900px){
+    .container{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .container{
+        grid-template-columns:1fr;
+    }
 }
 
 </style>
@@ -150,7 +224,10 @@ h1{
 <body>
 
 <header>
+
     <div class="logo">Campus Events</div>
+    <div class="menu-toggle">☰</div>
+
     <nav>
         <ul>
             <li><a href="index.php">Accueil</a></li>
@@ -159,6 +236,7 @@ h1{
             <li><a href="inscriptions.php">Administration</a></li>
         </ul>
     </nav>
+
 </header>
 
 <h1>Catalogue des événements</h1>
@@ -187,6 +265,16 @@ if ($resultat && $resultat->num_rows > 0) {
 ?>
 
 </div>
+
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector("nav");
+
+toggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    toggle.classList.toggle("active");
+});
+</script>
 
 </body>
 </html>

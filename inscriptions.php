@@ -40,6 +40,7 @@ header{
     padding: 18px 50px;
     position: sticky;
     top: 0;
+    z-index: 1000;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
@@ -49,6 +50,7 @@ header{
     letter-spacing: 1px;
 }
 
+/* NAV DESKTOP */
 nav ul{
     display: flex;
     list-style: none;
@@ -82,16 +84,77 @@ nav ul li a:hover::after{
     width: 100%;
 }
 
+/* ===== BURGER ===== */
 .menu-toggle{
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    z-index:1100;
 }
+
+.menu-toggle span{
+    width:28px;
+    height:3px;
+    background:white;
+    border-radius:5px;
+    transition:0.3s;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:flex;
+    }
+
+    nav{
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--primary);
+        padding-top: 90px;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.4);
+        transition: 0.3s ease;
+    }
+
+    nav.active{
+        right: 0;
+    }
+
+    nav ul{
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    nav ul li a{
+        font-size: 18px;
+    }
+}
+
+/* ANIMATION BURGER X */
+.menu-toggle.active span:nth-child(1){
+    transform: rotate(45deg) translate(6px,6px);
+}
+
+.menu-toggle.active span:nth-child(2){
+    opacity:0;
+}
+
+.menu-toggle.active span:nth-child(3){
+    transform: rotate(-45deg) translate(5px,-5px);
+}
+
+/* ===== TITLE ===== */
 h1{
     text-align:center;
     margin:30px 0;
 }
 
+/* ===== TABLE ===== */
 table{
     width:95%;
     margin:auto;
@@ -117,19 +180,6 @@ td{
 tr:hover{
     background:#f1f5f9;
 }
-
-@media(max-width:768px){
-    header{
-        flex-direction:column;
-        gap:10px;
-        text-align:center;
-    }
-
-    nav ul{
-        flex-direction:column;
-        gap:10px;
-    }
-}
 </style>
 
 </head>
@@ -139,12 +189,17 @@ tr:hover{
 <header>
     <div class="logo">Campus Events</div>
 
+    <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
     <nav>
         <ul>
             <li><a href="index.php">Accueil</a></li>
             <li><a href="evenement.php">Événements</a></li>
             <li><a href="ajouter_evenement.php">Ajouter</a></li>
-
         </ul>
     </nav>
 </header>
@@ -183,9 +238,20 @@ if($resultat && $resultat->num_rows > 0){
 }
 ?>
 
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector("nav");
+
+toggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    toggle.classList.toggle("active");
+});
+</script>
+
 </body>
 </html>
 
 <?php
 $connexion->close();
 ?>
+

@@ -78,10 +78,20 @@ nav ul li a:hover::after{
 }
 
 .menu-toggle{
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+}.
+
+.menu-toggle span{
+    width:30px;
+    height:3px;
+    background:white;
+    border-radius:5px;
+    transition:0.3s;
 }
+
 
 .hero{
     height: 90vh;
@@ -221,10 +231,10 @@ nav ul li a:hover::after{
 </head>
 <body>
     <header>
-        <div class="menu-toggle">☰</div>
         <div class="logo">
             Campus Events
         </div>
+        <div class="menu-toggle">☰</div>
         <nav>
             <ul>
                 <li><a href="#">Accueil</a></li>
