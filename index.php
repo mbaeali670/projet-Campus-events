@@ -5,21 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Events </title>
     <style>
-    *{
+    :root{
+    --primary: #0b2a4a;
+    --secondary: #1e88e5;
+    --accent: #ffb300;
+    --light: #f5f7fb;
+    --dark: #1c1c1c;
+    --white: #ffffff;
+}
+
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Arial", sans-serif;
+    font-family: "Segoe UI", sans-serif;
 }
 
 body{
-    background: #f5f7fb;
-    color: #333;
+    background: var(--light);
+    color: var(--dark);
 }
 
 header{
-    background: #002147;
-    color: white;
+    background: var(--primary);
+    color: var(--white);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,134 +36,146 @@ header{
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .logo{
     font-size: 22px;
     font-weight: bold;
+    letter-spacing: 1px;
 }
 
 nav ul{
     display: flex;
     list-style: none;
-    gap: 20px;
+    gap: 25px;
 }
 
 nav ul li a{
     text-decoration: none;
-    color: white;
-    font-weight: bold;
+    color: var(--white);
+    font-weight: 500;
+    position: relative;
+    transition: 0.3s;
+}
+
+nav ul li a::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
     transition: 0.3s;
 }
 
 nav ul li a:hover{
-    color: gold;
+    color: var(--accent);
+}
+
+nav ul li a:hover::after{
+    width: 100%;
 }
 
 .menu-toggle{
     display: none;
-    font-size: 28px;
+    font-size: 30px;
     cursor: pointer;
 }
 
 .hero{
     height: 90vh;
-    background: url("image .jpeg") center/cover no-repeat;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("Image .jpeg") center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: white;
-    position: relative;
+    color: var(--white);
+    padding: 20px;
 }
 
-.hero::before{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
+.hero-content h1{
+    font-size: 60px;
+    margin-bottom: 15px;
 }
 
-.hero-content{
-    position: relative;
-}
-
-.hero h1{
-    font-size: 55px;
-    margin-bottom: 20px;
-}
-
-.hero p{
+.hero-content p{
     font-size: 18px;
-    margin-bottom: 20px;
-}
-
-button{
-    padding: 12px 22px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 25px;
+    line-height: 1.5;
 }
 
 .btn1, .btn2{
-    padding: 12px 22px;
-    border-radius: 8px;
-    text-decoration: none;
     display: inline-block;
+    padding: 12px 25px;
+    border-radius: 30px;
     font-size: 16px;
+    text-decoration: none;
     margin: 5px;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    font-weight: 500;
 }
 
 .btn1{
-    background: gold;
-    color: black;
+    background: var(--accent);
+    color: #000;
+}
+
+.btn1:hover{
+    background: #ffa000;
+    transform: translateY(-3px);
 }
 
 .btn2{
-    background: white;
-    color: #002147;
-    border: 2px solid white;
-}
-.btn1:hover{
-    background: orange;
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
 }
 
 .btn2:hover{
-    background: #002147;
-    color: white;
-}
-.btn1:hover,
-.btn2:hover{
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background: var(--white);
+    color: var(--primary);
+    transform: translateY(-3px);
 }
 
 .cards-section{
-    padding: 60px 40px;
+    padding: 70px 40px;
     text-align: center;
+}
+
+.cards-section h2{
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
 .cards{
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
     margin-top: 30px;
 }
 
 .card{
-    background: white;
-    width: 280px;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-    transition: transform 0.3s ease;
+    background: var(--white);
+    width: 300px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
 }
 
 .card:hover{
-    transform: translateY(-8px);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.card h3{
+    margin-bottom: 10px;
+    color: var(--primary);
 }
 
 @media (max-width: 768px){
@@ -169,29 +190,29 @@ button{
         top: 70px;
         left: 0;
         width: 100%;
-        background: #002147;
+        background: var(--primary);
         text-align: center;
+        padding: 20px 0;
     }
 
     nav ul{
         flex-direction: column;
+        gap: 15px;
     }
 
     nav.active{
         display: block;
     }
 
-    .hero h1{
-        font-size: 32px;
-    }
-    .hero-content{
-    padding: 20px;
+    .hero-content h1{
+        font-size: 35px;
     }
 
     .cards{
         flex-direction: column;
         align-items: center;
     }
+
     .card{
         width: 90%;
     }
@@ -210,6 +231,7 @@ button{
                 <li><a href="#">Accueil</a></li>
                 <li><a href="ajouter_evenement.php">Ajouter un événement</a></li>
                 <li><a href="evenement.php">Voir les événements</a></li>
+                <li><a href="inscriptions.php">Administration</a></li>
             </ul>
         </nav>
     </header>

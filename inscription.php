@@ -2,7 +2,7 @@
 require_once "connexion.php";
 
 if(!isset($_GET['id']) || empty($_GET['id'])){
-    die(" ID manquant dans l'URL");
+    die("ID manquant dans l'URL");
 }
 
 $id = $_GET['id'];
@@ -13,130 +13,271 @@ $resultat = $connexion->query($sql);
 if($resultat && $resultat->num_rows > 0){
     $event = $resultat->fetch_assoc();
 }else{
-    die(" Aucun événement trouvé avec cet ID");
+    die("Aucun événement trouvé avec cet ID");
 }
+
 if(isset($_POST['submit'])){
-    $nom=$_POST['nom'];
-    $prenom=$_POST['prenom'];
-    $email=$_POST['email'];
-    $filiere=$_POST['filiere'];
-    $sql_inscription="INSERT INTO participation(nom,prenom,email,filiere,evenement_id)
-    VALUES ('$nom','$prenom','$email','$filiere','$id')";
-    if($connexion->query($sql_inscription)=== TRUE){
-        $message="Inscription réussie avec succés  🎉";
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $email = $_POST['email'];
+    $filiere = $_POST['filiere'];
+
+    $sql_inscription = "INSERT INTO participation(nom,prenom,email,filiere,evenement_id)
+                        VALUES ('$nom','$prenom','$email','$filiere','$id')";
+
+    if($connexion->query($sql_inscription) === TRUE){
+        $message = "Inscription réussie avec succès 🎉";
     }else{
-        $message="Erreur:" .$connexion->error;
+        $message = "Erreur : ".$connexion->error;
     }
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
-    <style>
-    *{
-       margin:0;
-       padding:0;
-       box-sizing:border-box;
-       font-family:Arial,sans-serif;
-    }
-    body{
-      background:#f4f7fb;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:100vh;
-      padding:20px;
-    }
-    .form-container{
-       background:white;
-       width:100%;
-       max-width:500px;
-       padding:30px;
-       border-radius:15px;
-       box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    }
-    h1{
-       text-align:center;
-       color:#2563eb;
-       margin-bottom:20px;
-    }
-    .event-title{
-      background:#eff6ff;
-      padding:15px;
-      border-radius:10px;
-      margin-bottom:20px;
-      color:#1e3a8a;
-      font-weight:bold;
-    }
-    input{
-      width:100%;
-      padding:12px;
-      margin:10px 0;
-      border:1px solid #ccc;
-      border-radius:8px;
-      outline:none;
-    }
-    input:focus{
-     border-color:#2563eb;
-    }
-    button{
-      width:100%;
-      padding:12px;
-      background:#2563eb;
-      color:white;
-      border:none;
-      border-radius:8px;
-      cursor:pointer;
-      font-size:16px;
-      transition:0.3s;
-    }
-    button:hover{
-     background:#1e40af;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription à un événement</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    min-height:100vh;
+}
+
+/* MENU */
+
+header{
+    background:#0b2a4a;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:0.3s;
+}
+
+nav ul li a:hover{
+    color:#ffb300;
+}
+
+.menu-toggle{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* FORMULAIRE */
+
+.container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+.form-container{
+    background:white;
+    width:100%;
+    max-width:550px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2563eb;
+    margin-bottom:20px;
+}
+
+.event-title{
+    background:#eff6ff;
+    color:#1e3a8a;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+label{
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#1e40af;
+}
+
+.message{
+    background:#d1fae5;
+    color:#065f46;
+    padding:12px;
+    border-radius:8px;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:block;
     }
 
-    .message{
-      background:#d1fae5;
-      color:#065f46;
-      padding:12px;
-      border-radius:8px;
-      margin-bottom:15px;
-      text-align:center;
+    nav{
+        display:none;
+        position:absolute;
+        top:65px;
+        left:0;
+        width:100%;
+        background:#0b2a4a;
     }
+
+    nav.active{
+        display:block;
+    }
+
+    nav ul{
+        flex-direction:column;
+        text-align:center;
+        padding:15px 0;
+    }
+
+    nav ul li{
+        margin:10px 0;
+    }
+
+    header{
+        padding:15px 20px;
+    }
+}
 
 </style>
 </head>
 <body>
- <div class="form-container">
-      <h1>Inscription</h1>
-      <div class="event-title">
-          Evénement :<?php echo $event['titre'];?>
-      </div>
-      <?php
-         if(isset($message)){
-                echo"<div class='message'>$message</div>";
-            }
+
+<header>
+    <div class="logo">Campus Events</div>
+
+    <div class="menu-toggle">☰</div>
+
+    <nav>
+        <ul>
+            <li><a href="index.php">Accueil</a></li>
+            <li><a href="evenement.php">Événements</a></li>
+            <li><a href="ajouter_evenement.php">Ajouter</a></li>
+            <li><a href="inscriptions.php">Administration</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="form-container">
+
+        <h1>Inscription</h1>
+
+        <div class="event-title">
+            Événement : <?php echo $event['titre']; ?>
+        </div>
+
+        <?php
+        if(isset($message)){
+            echo "<div class='message'>$message</div>";
+        }
         ?>
-       <form method="POST">
-          <label>Nom:</label><br>
-          <input type="text" name="nom" required><br><br>
-          <label>Prenom:</label><br>
-          <input type="text" name="prenom" required><br><br>
-          <label>Email:</label>
-          <input type="email" name="email" required><br><br>
-          <label>Filiere:</label><br>
-          <input type="text" name="filiere" required><br><br>
-          <button type="submit" name="submit">
-            S'inscrire
-          </button>
-       </form>
+
+        <form method="POST">
+
+            <label>Nom</label>
+            <input type="text" name="nom" required>
+
+            <label>Prénom</label>
+            <input type="text" name="prenom" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Filière</label>
+            <input type="text" name="filiere" required>
+
+            <button type="submit" name="submit">
+                S'inscrire
+            </button>
+
+        </form>
+
     </div>
-    
+
+</div>
+
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector("nav");
+
+toggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
+});
+</script>
+
 </body>
 </html>
 
 <?php
-  $connexion->close();
+$connexion->close();
 ?>
