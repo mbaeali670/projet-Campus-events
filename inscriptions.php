@@ -101,7 +101,6 @@ nav ul li a:hover::after{
     transition:0.3s;
 }
 
-/* ===== MOBILE ===== */
 @media(max-width:768px){
 
     .menu-toggle{
@@ -135,7 +134,6 @@ nav ul li a:hover::after{
     }
 }
 
-/* ANIMATION BURGER X */
 .menu-toggle.active span:nth-child(1){
     transform: rotate(45deg) translate(6px,6px);
 }
@@ -148,13 +146,11 @@ nav ul li a:hover::after{
     transform: rotate(-45deg) translate(5px,-5px);
 }
 
-/* ===== TITLE ===== */
 h1{
     text-align:center;
     margin:30px 0;
 }
 
-/* ===== TABLE ===== */
 table{
     width:95%;
     margin:auto;
@@ -190,9 +186,7 @@ tr:hover{
     <div class="logo">Campus Events</div>
 
     <div class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="menu-toggle">☰</div>
     </div>
 
     <nav>
